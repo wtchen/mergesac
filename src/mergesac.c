@@ -22,6 +22,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -170,7 +171,6 @@ void encode_sac(int num_files)
              t_start->tm_sec);
     end_time[num_files-1]++;
     struct tm *t_end = gmtime(&(end_time[num_files-1]));
-    //printf("%ld\n", end_time[num_files-1]);
     snprintf(new_sac_file_name, sizeof(new_sac_file_name),
              "%s%4d.%3d.%02d.%02d.%02d.0000.%s.%s..%s.M.SAC", new_sac_file_name,
              t_end->tm_year + 1900, t_end->tm_yday + 1, t_end->tm_hour,
@@ -220,23 +220,21 @@ If you decoded data by a Mac machine (INTEL-based), the binary data are in
 little endian. Then you can read by a program compiled by Mac WITHOUT USING THIS
 ROUTINE.
 */
-int arswap(array,nps)
-unsigned char array[];
-int nps;
+int arswap(unsigned char *array, int nps)
 {
     int i;
     unsigned int n;
     unsigned char a;
 
-    for(i=0; i<nps; i++)
+    for (i = 0; i < nps; i++)
     {
-        n=i*4;
-        a=array[n];
-        array[n]=array[n+3];
-        array[n+3]=a;
-        a=array[n+1];
-        array[n+1]=array[n+2];
-        array[n+2]=a;
+        n = i * 4;
+        a = array[n];
+        array[n] = array[n+3];
+        array[n+3] = a;
+        a = array[n+1];
+        array[n+1] = array[n+2];
+        array[n+2] = a;
     }
     return 1;
 }
