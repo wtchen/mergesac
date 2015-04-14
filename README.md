@@ -13,3 +13,5 @@ Simply run ``make install`` to compile and install to ``/usr/local/bin`` (assume
 **Notes**
 
 The SAC files should be passed in chronological order. i.e. ``mergesac earliestfile.sac secondearliestfile.sac [...] latestfile.sac``
+
+This program uses POSIX system calls.
